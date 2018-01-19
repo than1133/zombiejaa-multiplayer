@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scripts/bullet.gd" type="Script" id=1]
+[ext_resource path="res://bullet.png" type="Texture" id=2]
+[ext_resource path="res://picture/csm_rws_9_3x62_dk_bp_2118165_14-6g_cmyk100_e7632692f5.tex" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5.15459, 11.2883 )
+
+[node name="bullet" type="KinematicBody2D" groups=[ "bullet" ]]
+
+process/pause_mode = 1
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.157784, -9.30898 )
+shapes/0/trigger = true
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0.157784, -9.30898 )
+shape = SubResource( 1 )
+trigger = true
+_update_shape_index = 0
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Sprite2" type="Sprite" parent="."]
+
+transform/pos = Vector2( -0.318803, -6.25118 )
+transform/rot = -90.0818
+transform/scale = Vector2( 0.104214, 0.222714 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+transform/pos = Vector2( 0.157784, -9.30898 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+
+shape = SubResource( 1 )
+trigger = true
+_update_shape_index = 0
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+

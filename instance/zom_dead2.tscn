@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/zom_dead.gd" type="Script" id=1]
+[ext_resource path="res://picture/blood_PNG6116.tex" type="Texture" id=2]
+[ext_resource path="res://picture/zom2/zom2DEAD0024.tex" type="Texture" id=3]
+
+[node name="zombie_dead" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 7.34317, 7.15786 )
+transform/scale = Vector2( 0.195765, 0.216607 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0.0184364, 0.421127 )
+transform/scale = Vector2( 1.3781, 1.33649 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+

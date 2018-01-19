@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://scripts/kill_list_content.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/thai.fnt" type="BitmapFont" id=2]
+
+[node name="kill__list_content" type="HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+alignment = 0
+script/script = ExtResource( 1 )
+
+[node name="Who" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 11.0
+margin/right = 24.0
+margin/bottom = 29.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ใคร"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="kill" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 28.0
+margin/top = 11.0
+margin/right = 46.0
+margin/bottom = 29.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ฆ่า"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Died" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 50.0
+margin/top = 11.0
+margin/right = 70.0
+margin/bottom = 29.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "ฉัน"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

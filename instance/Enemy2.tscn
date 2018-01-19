@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://scripts/Enemy2.gd" type="Script" id=1]
+[ext_resource path="res://picture/zom2/zom2-10024.tex" type="Texture" id=2]
+[ext_resource path="res://picture/zom2/zom2-20024.tex" type="Texture" id=3]
+[ext_resource path="res://picture/zom2/zom2-30024.tex" type="Texture" id=4]
+[ext_resource path="res://sounds/zombie_hit.ogg" type="AudioStream" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ { "frames":[ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ], "loop":true, "name":"default", "speed":5.0 } ]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+
+closed = true
+cull_mode = 0
+polygon = Vector2Array( -22.6153, -27.1297, 1.21755, -38.6572, 25.8448, -22.0863, 28.6253, 3.13018, 17.9005, 14.2975, 0.423113, 16.4589, -21.0265, 9.61443, -29.7652, -8.03714 )
+
+[sub_resource type="CircleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 837.381
+
+[sub_resource type="CircleShape2D" id=5]
+
+custom_solver_bias = 0.0
+radius = 32.6157
+
+[node name="Enemy2" type="KinematicBody2D" groups=[ "zom" ]]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 3.78463, 0, 0, 3.68355, -1.89651, -3.1335 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+
+frames = SubResource( 2 )
+animation = "default"
+frame = 2
+playing = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
+
+transform/pos = Vector2( -1.46303, 6.45962 )
+transform/scale = Vector2( 1, 1.10265 )
+occluder = SubResource( 3 )
+light_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( -1.89651, -3.1335 )
+transform/scale = Vector2( 3.78463, 3.68355 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="area_detect" type="Area2D" parent="."]
+
+visibility/visible = false
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_detect"]
+
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 0
+
+[node name="area_ hit" type="Area2D" parent="."]
+
+visibility/visible = false
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.43394, -3.63089 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_ hit"]
+
+transform/pos = Vector2( -1.43394, -3.63089 )
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = 0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 60 )
+layer_mask = 1
+type_mask = 15
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="zombie_hit" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 5 )
+stream/play = false
+stream/loop = false
+stream/volume_db = 0.0
+stream/autoplay = false
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+[connection signal="body_enter" from="area_ hit" to="." method="_on_area__hit_body_enter"]
+
+
